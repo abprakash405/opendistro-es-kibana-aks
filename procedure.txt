@@ -1,5 +1,8 @@
 
 
+#To deploy 
+kubectl apply -f elasticsearch-yml-configmap.yml
+
 kubectl apply -f elasticsearch-statefulsets-data.yaml
 kubectl apply -f elasticsearch-statefulsets-client.yaml
 kubectl apply -f elasticsearch-statefulsets-ingest.yaml
@@ -7,6 +10,31 @@ kubectl apply -f elasticsearch-statefulsets-ingest.yaml
 kubectl apply -f elasticsearch-statefulsets-master.yaml
 
 
+#To undeploy 
+kubectl delete -f elasticsearch-yml-configmap.yml
+kubectl delete -f elasticsearch-statefulsets-data.yaml
+kubectl delete -f elasticsearch-statefulsets-client.yaml
+kubectl delete -f elasticsearch-statefulsets-ingest.yaml
+kubectl delete -f elasticsearch-statefulsets-master.yaml
+
 kubectl delete -f elasticsearch-statefulsets-master.yaml,elasticsearch-statefulsets-client.yaml,elasticsearch-statefulsets-data.yaml,elasticsearch-statefulsets-ingest.yaml
 
 
+###
+# As per open distro elasticsearch it will create index so mandatoring DATA node should be ready before MASTER is ready.
+Otherwise it might through an error like: Open distro not initialized 
+Deploy data, client, ingest and once those are ready then finally deploy master. 
+
+##Kibana will take few minutes to start 
+
+https://20.62.187.96:9200/
+
+https://20.62.187.96:9200/_nodes/ingest
+
+https://20.62.187.96:9200/_cat/nodes?v
+
+https://20.62.187.96:9200/_nodes/stats
+
+
+#ref:
+https://github.com/opendistro-for-elasticsearch/community/blob/master/open-distro-elasticsearch-kubernetes/elasticsearch/40-es-master-deploy.yml

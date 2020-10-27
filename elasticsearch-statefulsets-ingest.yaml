@@ -43,11 +43,11 @@
             - name: CLUSTER_NAME
               value: es-cluster
             - name: NODE_MASTER
-              value: false
-             - name: NODE_DATA
-              value: false
-             - name: NODE_INGEST
-              value: true          
+              value: "false"
+            - name: NODE_DATA
+              value: "false"
+            - name: NODE_INGEST
+              value: "true"
             - name: node.name
               valueFrom:
                 fieldRef:
