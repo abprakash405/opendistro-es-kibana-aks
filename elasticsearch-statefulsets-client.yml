@@ -33,8 +33,6 @@ spec:
           name: inter-node
           protocol: TCP
         volumeMounts:
-        - name: data
-          mountPath: /usr/share/elasticsearch/data
         - name: es-yaml
           mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
           readOnly: true
@@ -63,14 +61,6 @@ spec:
         configMap:
           name: es-yaml
       initContainers:
-      - name: fix-permissions
-        image: busybox
-        command: ["sh", "-c", "chown -R 1000:1000 /usr/share/elasticsearch/data"]
-        securityContext:
-          privileged: true
-        volumeMounts:
-        - name: data
-          mountPath: /usr/share/elasticsearch/data
       - name: increase-vm-max-map
         image: busybox
         command: ["sysctl", "-w", "vm.max_map_count=262144"]
@@ -81,14 +71,3 @@ spec:
         command: ["sh", "-c", "ulimit -n 65536"]
         securityContext:
           privileged: true
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-      #namespace: kube-logging
-      labels:
-        app: elasticsearch
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 2Gi
