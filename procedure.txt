@@ -1,0 +1,12 @@
+
+
+kubectl apply -f elasticsearch-statefulsets-data.yaml
+kubectl apply -f elasticsearch-statefulsets-client.yaml
+kubectl apply -f elasticsearch-statefulsets-ingest.yaml
+#Wait for few minutes to get client,data,ingest ready before deploy master node. 
+kubectl apply -f elasticsearch-statefulsets-master.yaml
+
+
+kubectl delete -f elasticsearch-statefulsets-master.yaml,elasticsearch-statefulsets-client.yaml,elasticsearch-statefulsets-data.yaml,elasticsearch-statefulsets-ingest.yaml
+
+
