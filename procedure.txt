@@ -3,11 +3,11 @@
 #To deploy 
 kubectl apply -f elasticsearch-yml-configmap.yml
 
-kubectl apply -f elasticsearch-statefulsets-data.yaml
-kubectl apply -f elasticsearch-statefulsets-client.yaml
-kubectl apply -f elasticsearch-statefulsets-ingest.yaml
+kubectl apply -f elasticsearch-statefulsets-data.yml
+kubectl apply -f elasticsearch-statefulsets-client.yml
+kubectl apply -f elasticsearch-statefulsets-ingest.yml
 #Wait for few minutes to get client,data,ingest ready before deploy master node. 
-kubectl apply -f elasticsearch-statefulsets-master.yaml
+kubectl apply -f elasticsearch-statefulsets-master.yml
 kubectl apply -f elasticsearch-svc.yml 
 kubectl apply -f kibana-deployment.yml 
 kubectl apply  -f kibana-svc.yml
@@ -15,12 +15,12 @@ kubectl apply  -f kibana-svc.yml
 
 #To undeploy 
 kubectl delete -f elasticsearch-yml-configmap.yml
-kubectl delete -f elasticsearch-statefulsets-data.yaml
-kubectl delete -f elasticsearch-statefulsets-client.yaml
-kubectl delete -f elasticsearch-statefulsets-ingest.yaml
-kubectl delete -f elasticsearch-statefulsets-master.yaml
+kubectl delete -f elasticsearch-statefulsets-data.yml
+kubectl delete -f elasticsearch-statefulsets-client.yml
+kubectl delete -f elasticsearch-statefulsets-ingest.yml
+kubectl delete -f elasticsearch-statefulsets-master.yml
 
-kubectl delete -f elasticsearch-statefulsets-master.yaml,elasticsearch-statefulsets-client.yaml,elasticsearch-statefulsets-data.yaml,elasticsearch-statefulsets-ingest.yaml
+kubectl delete -f elasticsearch-statefulsets-master.yml,elasticsearch-statefulsets-client.yml,elasticsearch-statefulsets-data.yml,elasticsearch-statefulsets-ingest.yml
 
 kubectl delete -f elasticsearch-svc.yml 
 kubectl delete -f kibana-deployment.yml 
